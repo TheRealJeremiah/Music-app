@@ -1,0 +1,29 @@
+<% if flash[:errors] %>
+  <ul>
+  <% flash[:errors].each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+<%= link_to "Back to band", band_url(@album.band) %>
+<form action=<%= album_url(@album) %> method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="band_selector">Band name:</label>
+  <select name="album[band_id]" id="band_selector">
+    <% @bands.each do |band| %>
+    <option value="<%= band.id %>"> <%= band.name %></option>
+    <% end %>
+  </select><br><br>
+  <label>Album name:
+  <input type="text" name="album[name]" value="<%= @album.name %>"></label>
+  <br><br>
+  <label for="is_live">Live album?</label>
+  <input type="checkbox" name="album[live]" id="is_live" value="true">
+  <br>
+  <input type="submit" value="submit">
+
+</form>

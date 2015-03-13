@@ -1,0 +1,15 @@
+<%= link_to @track.album.name, album_url(@track.album) %>
+<br>
+<h2>Track info:</h2>
+Track Name: <%= @track.name %><br>
+Album: <%= @track.album.name %><br>
+Bonus?: <%= @track.bonus %><br>
+<%= link_to "edit", edit_track_url(@track) %>
+<h2>Lyrics:</h2>
+<%= @track.lyrics %> <br><br>
+
+<form action="<%= track_url(@track) %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete track">
+</form>
